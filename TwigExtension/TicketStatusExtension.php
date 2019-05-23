@@ -22,10 +22,8 @@ class TicketStatusExtension extends AbstractExtension
     public function __construct($ticketMessageClass)
     {
         $this->ticketMessageClass = $ticketMessageClass;
-        /** @var TicketMessageInterface $ticketMessage */
-        $ticketMessage = new $this->$ticketMessageClass();
         //TODO Maybe an error is of use if classname is no intance of TicketMessage Interface
-        $this->statuses = $ticketMessage::getStatuses();
+        $this->statuses = $ticketMessageClass::getStatuses();
     }
 
     public function getFunctions()
