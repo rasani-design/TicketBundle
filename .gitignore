@@ -3,3 +3,4 @@
 /Tests/Functional/logs
 composer.lock
 .php_cs.cache
+composer.phar
