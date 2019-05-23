@@ -37,8 +37,8 @@ class TicketStatusExtension extends AbstractExtension
                 array('is_safe' => array('html'))
             ),
             new TwigFunction(
-                'hackzilla_getTicketStatusString',
-                array($this,'getTicketStatusString'),
+                'hackzilla_getTicketStatusStringByMessage',
+                array($this,'getTicketStatusStringMessage'),
                 array('is_safe' => array('html'))
             ),
         );
@@ -57,7 +57,7 @@ class TicketStatusExtension extends AbstractExtension
      * @param TicketMessageInterface $ticketMessage
      * @return mixed
      */
-    private function getTicketStatusString($ticketMessage) {
+    private function getTicketStatusStringMessage($ticketMessage) {
 
         if($ticketMessage instanceof $this->ticketMessageClass) {
             return $this->statuses[$ticketMessage->getStatus()];

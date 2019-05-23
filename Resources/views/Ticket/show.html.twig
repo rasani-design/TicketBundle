@@ -8,7 +8,7 @@
     </p>
 
     <h1>
-        {{ macros.status_btn(ticket.status, ticket.statusString|trans({}, 'HackzillaTicketBundle')) }}
+        {{ macros.status_btn(ticket.status, hackzilla_getTicketStatusStringById(ticket.status)|trans({}, 'HackzillaTicketBundle')) }}
         {{ macros.priority_btn(ticket.priority, ticket.priorityString|trans({}, 'HackzillaTicketBundle')) }}
         <small>#{{ ticket.id }}</small>
         - {{ ticket.subject }}
@@ -28,7 +28,7 @@
     {% for message in ticket.messages %}
 
         {% if previousStatus and previousStatus != message.status %}
-            {{ macros.status_alert(message.status, message.statusString|trans({}, 'HackzillaTicketBundle')) }}
+            {{ macros.status_alert(message.status, hackzilla_getTicketStatusStringByMessage(message)|trans({}, 'HackzillaTicketBundle')) }}
         {% endif %}
 
         {% if previousPriority and previousPriority != message.priority %}
