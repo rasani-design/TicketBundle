@@ -140,6 +140,13 @@ interface TicketMessageInterface
     public function setTicket(TicketInterface $ticket = null);
 
     /**
+     * Returns an array of Statusescode -> Label
+     *
+     * @return array
+     */
+    public static function getStatuses();
+
+    /**
      * Get ticket.
      *
      * @return TicketInterface
@@ -159,16 +166,6 @@ interface TicketMessageInterface
     const STATUS_RESOLVED              = 14;
 
     const STATUS_CLOSED                = 15;
-
-    const STATUSES = [
-        self::STATUS_INVALID               => 'STATUS_INVALID',
-        self::STATUS_OPEN                  => 'STATUS_OPEN',
-        self::STATUS_IN_PROGRESS           => 'STATUS_IN_PROGRESS',
-        self::STATUS_INFORMATION_REQUESTED => 'STATUS_INFORMATION_REQUESTED',
-        self::STATUS_ON_HOLD               => 'STATUS_ON_HOLD',
-        self::STATUS_RESOLVED              => 'STATUS_RESOLVED',
-        self::STATUS_CLOSED                => 'STATUS_CLOSED',
-    ];
 
     const PRIORITY_INVALID = 0;
 

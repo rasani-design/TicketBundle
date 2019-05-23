@@ -48,6 +48,19 @@ trait TicketMessageTrait
         $this->setCreatedAt(new \DateTime());
     }
 
+    public static function getStatuses()
+    {
+        return array(
+            TicketMessageInterface::STATUS_INVALID               => 'STATUS_INVALID',
+            TicketMessageInterface::STATUS_OPEN                  => 'STATUS_OPEN',
+            TicketMessageInterface::STATUS_IN_PROGRESS           => 'STATUS_IN_PROGRESS',
+            TicketMessageInterface::STATUS_INFORMATION_REQUESTED => 'STATUS_INFORMATION_REQUESTED',
+            TicketMessageInterface::STATUS_ON_HOLD               => 'STATUS_ON_HOLD',
+            TicketMessageInterface::STATUS_RESOLVED              => 'STATUS_RESOLVED',
+            TicketMessageInterface::STATUS_CLOSED                => 'STATUS_CLOSED',
+        );
+    }
+
     /**
      * Set status.
      *
