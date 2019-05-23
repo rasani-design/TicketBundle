@@ -256,8 +256,9 @@ class TicketManager implements TicketManagerInterface
 
         if (false === $statuses) {
             $statuses = [];
-
-            foreach (TicketMessageInterface::STATUSES as $id => $value) {
+            /** @var TicketMessageInterface $ticketMessageClass */
+            $ticketMessageClass = new $this->ticketMessageClass();
+            foreach ($ticketMessageClass::getStatuses() as $id => $value) {
                 $statuses[$id] = $this->translator->trans($value, [], 'HackzillaTicketBundle');
             }
         }

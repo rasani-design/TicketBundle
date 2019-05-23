@@ -140,18 +140,18 @@ interface TicketMessageInterface
     public function setTicket(TicketInterface $ticket = null);
 
     /**
-     * Returns an array of Statusescode -> Label
-     *
-     * @return array
-     */
-    public static function getStatuses();
-
-    /**
      * Get ticket.
      *
      * @return TicketInterface
      */
     public function getTicket();
+
+    /**
+     * Returns an array of Statusescode -> Label
+     *
+     * @return array
+     */
+    public static function getStatuses();
 
     const STATUS_INVALID               = 0;
 

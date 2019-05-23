@@ -2,6 +2,7 @@
 
 namespace Hackzilla\Bundle\TicketBundle\Form\Type;
 
+use Hackzilla\Bundle\TicketBundle\Entity\TicketMessage;
 use Hackzilla\Bundle\TicketBundle\Model\TicketMessageInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -11,7 +12,7 @@ class StatusType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = TicketMessageInterface::STATUSES;
+        $choices = TicketMessage::getStatuses();
         unset($choices[0]);
 
         $resolver->setDefaults(

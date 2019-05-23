@@ -84,7 +84,7 @@ trait TicketMessageTrait
      */
     public function setStatusString($status)
     {
-        $status = \array_search(\strtolower($status), TicketMessageInterface::STATUSES);
+        $status = \array_search(\strtolower($status), static::getStatuses());
 
         if ($status > 0) {
             $this->setStatus($status);
@@ -110,11 +110,11 @@ trait TicketMessageTrait
      */
     public function getStatusString()
     {
-        if (!empty(TicketMessageInterface::STATUSES[$this->status])) {
-            return TicketMessageInterface::STATUSES[$this->status];
+        if (!empty(static::getStatuses()[$this->status])) {
+            return static::getStatuses()[$this->status];
         }
 
-        return TicketMessageInterface::STATUSES[0];
+        return static::getStatuses()[0];
     }
 
     /**
