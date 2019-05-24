@@ -42,9 +42,9 @@ class TicketStatusExtension extends AbstractExtension
         );
     }
 
-    private function getTicketStatusStringById($statusId)
+    public function getTicketStatusStringById($statusId)
     {
-        if(array_key_exists($stausId, $this->statuses)) {
+        if(array_key_exists($statusId, $this->statuses)) {
             return $this->statuses[$statusId];
         }
 
@@ -55,7 +55,7 @@ class TicketStatusExtension extends AbstractExtension
      * @param TicketMessageInterface $ticketMessage
      * @return mixed
      */
-    private function getTicketStatusStringMessage($ticketMessage) {
+    public function getTicketStatusStringMessage($ticketMessage) {
 
         if($ticketMessage instanceof $this->ticketMessageClass) {
             return $this->statuses[$ticketMessage->getStatus()];
