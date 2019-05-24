@@ -82,25 +82,6 @@ trait TicketTrait
     }
 
     /**
-     * Set status string.
-     *
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatusString($status)
-    {
-        //TODO Implement twig function to make this function obsolete, it is only used in twig templates!
-        $status = \array_search(\strtolower($status), TicketMessageInterface::STATUSES);
-
-        if ($status > 0) {
-            $this->setStatus($status);
-        }
-
-        return $this;
-    }
-
-    /**
      * Get status.
      *
      * @return int
@@ -108,21 +89,6 @@ trait TicketTrait
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Get status string.
-     *
-     * @return string
-     */
-    public function getStatusString()
-    {
-        //TODO Implement twig function to make this function obsolete, it is only used in twig templates!
-        if (array_key_exists($this->status, TicketMessageInterface::STATUSES)) {
-            return TicketMessageInterface::STATUSES[$this->status];
-        }
-
-        return TicketMessageInterface::STATUSES[0];
     }
 
     /**

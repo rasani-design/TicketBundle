@@ -20,14 +20,6 @@ interface TicketMessageInterface
      */
     public function setStatus($status);
 
-    /**
-     * Set status string.
-     *
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatusString($status);
 
     /**
      * Get status.
@@ -35,13 +27,6 @@ interface TicketMessageInterface
      * @return int
      */
     public function getStatus();
-
-    /**
-     * Get status string.
-     *
-     * @return string
-     */
-    public function getStatusString();
 
     /**
      * Set priority.
