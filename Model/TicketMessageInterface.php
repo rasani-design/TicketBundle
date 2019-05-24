@@ -148,12 +148,15 @@ interface TicketMessageInterface
 
     /**
      * Returns an array of Statusescode -> Label
+     * Enables users to Implement new statuses.
      *
      * @return array
      */
     public static function getStatuses();
 
-    //TODO REMOVE!
+    /*
+     * Lets keep the statuses array for smother overriding in trait.
+     */
     const STATUSES = array(
         TicketMessageInterface::STATUS_INVALID               => 'STATUS_INVALID',
         TicketMessageInterface::STATUS_OPEN                  => 'STATUS_OPEN',
