@@ -85,7 +85,7 @@ class TicketManager implements TicketManagerInterface
      */
     public function createMessage(TicketInterface $ticket = null)
     {
-        /* @var TicketMessageInterface $ticket */
+        /* @var TicketMessageInterface $message */
         $message = new $this->ticketMessageClass();
 
         if ($ticket) {
@@ -93,7 +93,7 @@ class TicketManager implements TicketManagerInterface
             $message->setStatus($ticket->getStatus());
             $message->setTicket($ticket);
         } else {
-            $message->setStatus(TicketMessage::STATUS_OPEN);
+            $message->setStatus(($this->ticketMessageClass)::STATUS_OPEN);
         }
 
         return $message;
@@ -188,7 +188,7 @@ class TicketManager implements TicketManagerInterface
             case TicketMessage::STATUS_CLOSED:
                 $query
                     ->andWhere('t.status = :status')
-                    ->setParameter('status', TicketMessageInterface::STATUS_CLOSED);
+                    ->setParameter('status', ($this->ticketMessageClass)::STATUS_CLOSED);
 
                 break;
 
@@ -196,7 +196,7 @@ class TicketManager implements TicketManagerInterface
             default:
                 $query
                     ->andWhere('t.status != :status')
-                    ->setParameter('status', TicketMessageInterface::STATUS_CLOSED);
+                    ->setParameter('status', ($this->ticketMessageClass)::STATUS_CLOSED);
         }
 
         if ($ticketPriority) {
@@ -237,7 +237,7 @@ class TicketManager implements TicketManagerInterface
 //            ->select($this->ticketClass.' t')
             ->where('t.status = :status')
             ->andWhere('t.lastMessage < :closeBeforeDate')
-            ->setParameter('status', TicketMessageInterface::STATUS_RESOLVED)
+            ->setParameter('status', ($this->ticketMessageClass)::STATUS_RESOLVED)
             ->setParameter('closeBeforeDate', $closeBeforeDate);
 
         return $query->getQuery()->getResult();

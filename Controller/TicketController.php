@@ -2,7 +2,6 @@
 
 namespace Hackzilla\Bundle\TicketBundle\Controller;
 
-use Hackzilla\Bundle\TicketBundle\Entity\Ticket;
 use Hackzilla\Bundle\TicketBundle\Event\TicketEvent;
 use Hackzilla\Bundle\TicketBundle\Form\Type\TicketMessageType;
 use Hackzilla\Bundle\TicketBundle\Form\Type\TicketType;
@@ -122,8 +121,8 @@ class TicketController extends Controller
     {
         /** @var TicketManager $ticketManager */
         $ticketManager = $this->get('hackzilla_ticket.ticket_manager');
-        /** @var Ticket $ticket */
-        $ticket        = $ticketManager->getTicketById($ticketId);
+        /** @var TicketInterface $ticket */
+        $ticket = $ticketManager->getTicketById($ticketId);
 
         if (!$ticket) {
             return $this->redirect($this->generateUrl('hackzilla_ticket'));
