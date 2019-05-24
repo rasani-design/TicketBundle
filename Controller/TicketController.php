@@ -2,9 +2,11 @@
 
 namespace Hackzilla\Bundle\TicketBundle\Controller;
 
+use Hackzilla\Bundle\TicketBundle\Entity\Ticket;
 use Hackzilla\Bundle\TicketBundle\Event\TicketEvent;
 use Hackzilla\Bundle\TicketBundle\Form\Type\TicketMessageType;
 use Hackzilla\Bundle\TicketBundle\Form\Type\TicketType;
+use Hackzilla\Bundle\TicketBundle\Manager\TicketManager;
 use Hackzilla\Bundle\TicketBundle\Model\TicketInterface;
 use Hackzilla\Bundle\TicketBundle\Model\TicketMessageInterface;
 use Hackzilla\Bundle\TicketBundle\TicketEvents;
@@ -118,7 +120,9 @@ class TicketController extends Controller
      */
     public function showAction($ticketId)
     {
+        /** @var TicketManager $ticketManager */
         $ticketManager = $this->get('hackzilla_ticket.ticket_manager');
+        /** @var Ticket $ticket */
         $ticket        = $ticketManager->getTicketById($ticketId);
 
         if (!$ticket) {
@@ -234,7 +238,7 @@ class TicketController extends Controller
      *
      * @param mixed $id The entity id
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface The form
      */
     private function createDeleteForm($id)
     {
@@ -246,7 +250,7 @@ class TicketController extends Controller
     /**
      * @param TicketMessageInterface $message
      *
-     * @return \Symfony\Component\Form\Form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createMessageForm(TicketMessageInterface $message)
     {
