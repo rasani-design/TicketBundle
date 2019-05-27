@@ -65,8 +65,9 @@ class TicketController extends Controller
      */
     public function createAction(Request $request)
     {
+        /** @var TicketManager $ticketManager */
         $ticketManager = $this->get('hackzilla_ticket.ticket_manager');
-
+        /** @var TicketInterface $ticket */
         $ticket = $ticketManager->createTicket();
         $form   = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
