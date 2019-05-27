@@ -21,27 +21,11 @@ interface TicketInterface
     public function setStatus($status);
 
     /**
-     * Set ticket status by string.
-     *
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatusString($status);
-
-    /**
      * Get ticket status.
      *
      * @return int
      */
     public function getStatus();
-
-    /**
-     * Get ticket status string.
-     *
-     * @return string
-     */
-    public function getStatusString();
 
     /**
      * Set ticket priority.

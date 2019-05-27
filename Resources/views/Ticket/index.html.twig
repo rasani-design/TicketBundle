@@ -54,7 +54,7 @@
                 <td><a href="{{ path('hackzilla_ticket_show', { 'ticketId': entity.id }) }}">{{ entity.id }}</a></td>
                 <td><a href="{{ path('hackzilla_ticket_show', { 'ticketId': entity.id }) }}">{{ entity.subject }}</a></td>
                 <td>{{ entity.userCreatedObject }}</td>
-                <td>{{ macros.status_btn(entity.status, entity.statusString|trans({}, 'HackzillaTicketBundle'), true) }}</td>
+                <td>{{ macros.status_btn(entity.status, hackzilla_getTicketStatusStringById(entity.status)|trans({}, 'HackzillaTicketBundle'), true) }}</td>
                 <td>{{ macros.priority_btn(entity.priority, entity.priorityString|trans({}, 'HackzillaTicketBundle'), true) }}</td>
                 <td>{% if entity.lastMessage %}{{ entity.lastMessage|date('LABEL_DATE_TIME_FORMAT'|trans({}, 'HackzillaTicketBundle')) }}{% endif %}</td>
                 <td>{% if entity.createdAt %}{{ entity.createdAt|date('LABEL_DATE_TIME_FORMAT'|trans({}, 'HackzillaTicketBundle')) }}{% endif %}</td>

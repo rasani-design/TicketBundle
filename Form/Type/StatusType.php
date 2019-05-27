@@ -9,9 +9,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StatusType extends AbstractType
 {
+    protected $ticketMessageClass;
+
+    public function __construct($ticketMessageClass)
+    {
+        $this->ticketMessageClass = $ticketMessageClass;
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = TicketMessageInterface::STATUSES;
+        $choices = ($this->ticketMessageClass)::getStatuses();
         unset($choices[0]);
 
         $resolver->setDefaults(

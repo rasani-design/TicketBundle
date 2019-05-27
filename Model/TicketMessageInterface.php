@@ -20,14 +20,6 @@ interface TicketMessageInterface
      */
     public function setStatus($status);
 
-    /**
-     * Set status string.
-     *
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatusString($status);
 
     /**
      * Get status.
@@ -35,13 +27,6 @@ interface TicketMessageInterface
      * @return int
      */
     public function getStatus();
-
-    /**
-     * Get status string.
-     *
-     * @return string
-     */
-    public function getStatusString();
 
     /**
      * Set priority.
@@ -146,6 +131,27 @@ interface TicketMessageInterface
      */
     public function getTicket();
 
+    /**
+     * Returns an array of Statusescode -> Label
+     * Enables users to Implement new statuses.
+     *
+     * @return array
+     */
+    public static function getStatuses();
+
+    /*
+     * Lets keep the statuses array for smother overriding in trait.
+     */
+    const STATUSES = array(
+        TicketMessageInterface::STATUS_INVALID               => 'STATUS_INVALID',
+        TicketMessageInterface::STATUS_OPEN                  => 'STATUS_OPEN',
+        TicketMessageInterface::STATUS_IN_PROGRESS           => 'STATUS_IN_PROGRESS',
+        TicketMessageInterface::STATUS_INFORMATION_REQUESTED => 'STATUS_INFORMATION_REQUESTED',
+        TicketMessageInterface::STATUS_ON_HOLD               => 'STATUS_ON_HOLD',
+        TicketMessageInterface::STATUS_RESOLVED              => 'STATUS_RESOLVED',
+        TicketMessageInterface::STATUS_CLOSED                => 'STATUS_CLOSED',
+    );
+
     const STATUS_INVALID               = 0;
 
     const STATUS_OPEN                  = 10;
@@ -159,16 +165,6 @@ interface TicketMessageInterface
     const STATUS_RESOLVED              = 14;
 
     const STATUS_CLOSED                = 15;
-
-    const STATUSES = [
-        self::STATUS_INVALID               => 'STATUS_INVALID',
-        self::STATUS_OPEN                  => 'STATUS_OPEN',
-        self::STATUS_IN_PROGRESS           => 'STATUS_IN_PROGRESS',
-        self::STATUS_INFORMATION_REQUESTED => 'STATUS_INFORMATION_REQUESTED',
-        self::STATUS_ON_HOLD               => 'STATUS_ON_HOLD',
-        self::STATUS_RESOLVED              => 'STATUS_RESOLVED',
-        self::STATUS_CLOSED                => 'STATUS_CLOSED',
-    ];
 
     const PRIORITY_INVALID = 0;
 

@@ -49,6 +49,14 @@ trait TicketMessageTrait
     }
 
     /**
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return TicketMessageInterface::STATUSES;
+    }
+
+    /**
      * Set status.
      *
      * @param int $status
@@ -63,24 +71,6 @@ trait TicketMessageTrait
     }
 
     /**
-     * Set status string.
-     *
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatusString($status)
-    {
-        $status = \array_search(\strtolower($status), TicketMessageInterface::STATUSES);
-
-        if ($status > 0) {
-            $this->setStatus($status);
-        }
-
-        return $this;
-    }
-
-    /**
      * Get status.
      *
      * @return int
@@ -88,20 +78,6 @@ trait TicketMessageTrait
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Get status string.
-     *
-     * @return string
-     */
-    public function getStatusString()
-    {
-        if (!empty(TicketMessageInterface::STATUSES[$this->status])) {
-            return TicketMessageInterface::STATUSES[$this->status];
-        }
-
-        return TicketMessageInterface::STATUSES[0];
     }
 
     /**
