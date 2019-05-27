@@ -5,9 +5,13 @@ namespace Hackzilla\Bundle\TicketBundle\TwigExtension;
 
 
 use Hackzilla\Bundle\TicketBundle\Entity\TicketMessage;
+use Hackzilla\Bundle\TicketBundle\Model\TicketInterface;
 use Hackzilla\Bundle\TicketBundle\Model\TicketMessageInterface;
+use http\Exception\UnexpectedValueException;
+use Symfony\Component\HttpFoundation\Response;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TicketStatusExtension extends AbstractExtension
 {
@@ -35,10 +39,20 @@ class TicketStatusExtension extends AbstractExtension
                 array('is_safe' => array('html'))
             ),
             new TwigFunction(
-                'hackzilla_getTicketStatusStringByMessage',
-                array($this,'getTicketStatusStringMessage'),
+                'hackzilla_getMessageStatusString',
+                array($this,'getMessageStatusString'),
                 array('is_safe' => array('html'))
             ),
+            new TwigFunction(
+                'hackzilla_getTicketStatusString',
+                array($this,'getTicketStatusString'),
+                array('is_safe' => array('html'))
+            ),
+            new TwigFunction(
+                'hackzilla_hasStatusByStatusString',
+                array($this,'hasStatusByStatusString'),
+                array('is_safe' => array('html'))
+            )
         );
     }
 
@@ -55,12 +69,36 @@ class TicketStatusExtension extends AbstractExtension
      * @param TicketMessageInterface $ticketMessage
      * @return mixed
      */
-    public function getTicketStatusStringMessage($ticketMessage) {
+    public function getMessageStatusString($ticketMessage)
+    {
 
         if($ticketMessage instanceof $this->ticketMessageClass) {
             return $this->statuses[$ticketMessage->getStatus()];
         }
 
         return $this->statuses[TicketMessageInterface::STATUS_INVALID];
+    }
+
+    public function getTicketStatusString(TicketInterface $ticket)
+    {
+        if($ticket instanceof TicketInterface) {
+            return $this->statuses[$ticket->getStatus()];
+        }
+
+        return $this->statuses[TicketMessageInterface::STATUS_INVALID];
+    }
+
+    /**
+     * @param TicketInterface|TicketMessageInterface $entity
+     * @param string $statusstring
+     */
+    public function hasStatusByStatusString($entity, $statusString)
+    {
+        if(!($entity instanceof TicketMessageInterface || $entity instanceof TicketInterface)) {
+            throw new HttpException(422);
+        }
+
+        return $statusString == $this->statuses[$entity->getStatus()];
+
     }
 }
